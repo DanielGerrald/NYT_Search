@@ -7,9 +7,9 @@ $("#search-button").on("click", function (e) {
     var recordsNum = $("#number-records").val();
     
     if (startYear === "") {
-        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + search + "&api-key=FPVcUJj8WvANRstLbU7B8rBMHW8vUA5s&limit=" + recordsNum + "&facet_fields=source&facet=true";
+        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + search + "&api-key=FPVcUJj8WvANRstLbU7B8rBMHW8vUA5s&facet_fields=source&facet=true";
     } else {
-        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + search + "&api-key=FPVcUJj8WvANRstLbU7B8rBMHW8vUA5s&limit=" + recordsNum + "&facet_fields=source&facet=true&begin_date=" + startYear + '0101' + "&end_date=" + endYear + '1231';
+        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + search + "&api-key=FPVcUJj8WvANRstLbU7B8rBMHW8vUA5s&facet_fields=source&facet=true&begin_date=" + startYear + '0101' + "&end_date=" + endYear + '1231';
     }
     
     $.ajax({
@@ -20,10 +20,19 @@ $("#search-button").on("click", function (e) {
             console.log(queryURL);
             console.log(response);
             //obtain response data that user selects (console.log to see how it is formatted)
-            $("#articles").append($("<h3>").text(response.response.docs[0].headline.main));
-            $("#articles").append($("<p>").text(response.response.docs[0].snippet));
+            for (var i=0;i < recordsNum; i++){
+                $("#articles").append(($("<h3>").text(response.response.docs[i].headline.main)).attr("class", " rounded text-center bg-primary text-black"));
+                $("#articles").append($("<p>").text(response.response.docs[i].snippet));
+            }
+                
         });
 });
 $("#clear-results").on("click", function(){
     $("#articles").html("");
+    $("#search-parameters").val("");
+    $("#start-year").val("");
+    $("#end-year").val("");
+    $("#number-records").val("");
 });
+
+//Very nice

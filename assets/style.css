@@ -1,10 +1,21 @@
 /* font set */
 body {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;    
+}
+
+.searchParameterHeader {
+    background-color: blue !important; 
+    /* color not showing? 
+    IDK but im sure its cuz of bootstrap; ahhhh that's right.. can't color change the suckers there's a special way tp do it
+    */
     
-};
+}
 
-card-header {
-    background-color: light blue;
+.nytSearchHeader {
+    background-color: light-blue;
+}
 
+.card-header {
+    background-color: navy;
+    color: white;
 }
